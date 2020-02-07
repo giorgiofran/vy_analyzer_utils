@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:glob/glob.dart';
 
 void main() {
-  @deprecated
+  @TestAnnotation()
   var dartFile = Glob('**.dart');
   Directory dir = Directory.current;
   for (FileSystemEntity entity in dir.listSync(recursive: true)) {
@@ -10,4 +10,9 @@ void main() {
       print('Path: ${entity.path}');
     }
   }
+}
+
+
+class TestAnnotation {
+  const TestAnnotation();
 }
