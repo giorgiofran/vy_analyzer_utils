@@ -3,7 +3,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:glob/glob.dart';
 import 'package:logging/logging.dart';
 import 'package:vy_analyzer_utils/src/mixin/ast_unit_info.dart';
-import 'package:vy_analyzer_utils/src/vy_analyzer_utils_base.dart';
+import 'package:vy_analyzer_utils/src/dart_source_analysis.dart';
 
 Logger _log = Logger('Dart Source Analysis');
 

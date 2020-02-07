@@ -1,6 +1,6 @@
 name: vy_analyzer_utils
 description: Simple utility for running an ast visitor on a dart project sources
-version: 0.1.0
+version: 0.1.1
 # homepage: https://www.example.com
 author: giorgio <giorgiofran@gmail.com>
 
