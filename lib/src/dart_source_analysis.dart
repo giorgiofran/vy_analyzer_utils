@@ -37,7 +37,8 @@ class DartSourceAnalysis {
 
   Future<void> analyzeAllFiles(AnalysisContextCollection collection) async {
     for (AnalysisContext context in collection.contexts) {
-      _log.fine('Analyzing files in context: ${context.contextRoot.root.path}');
+      _log.info('Analyzing files "$fileSelection" in context: '
+          '${context.contextRoot.root.path}');
       for (String path in context.contextRoot.analyzedFiles()) {
         if (fileSelection.matches(path)) {
           await analyzeSingleFile(context, path);

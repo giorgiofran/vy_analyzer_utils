@@ -1,4 +1,8 @@
 
+## 0.1.3
+
+- Initial analysis message type modified from FINE to INFO
+
 ## 0.1.2
 
 - Added const extractor

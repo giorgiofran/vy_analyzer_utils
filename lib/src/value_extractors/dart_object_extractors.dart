@@ -13,7 +13,9 @@ dynamic dartConstObjectValue(DartObject dartObject) {
     return null;
   }
   ParameterizedType fieldType = dartObject.type;
-  if (fieldType.isDartCoreString) {
+  if (fieldType == null || fieldType.isDartCoreNull) {
+    return null;
+  } else if (fieldType.isDartCoreString) {
     return dartObject.toStringValue();
   } else if (fieldType.isDartCoreBool) {
     return dartObject.toBoolValue();
