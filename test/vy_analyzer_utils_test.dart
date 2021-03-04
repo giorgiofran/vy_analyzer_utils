@@ -5,7 +5,7 @@ import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:vy_analyzer_utils/src/value_extractors/dart_object_extractors.dart';
 
-ClassDeclaration testClassDeclaration;
+ClassDeclaration? testClassDeclaration;
 
 void main() async {
   var dsa = DartSourceAnalysis(ClassRetriever(),
@@ -15,8 +15,8 @@ void main() async {
   group('Test Extractors', () {
     test('Test DartObject', () {
       expect(testClassDeclaration, isNotNull);
-      var ele = testClassDeclaration.declaredElement.getField('intValue');
-      expect(dartConstObjectValue(ele.computeConstantValue()), 2);
+      var ele = testClassDeclaration?.declaredElement?.getField('intValue');
+      expect(dartConstObjectValue(ele?.computeConstantValue()), 2);
     });
   });
 }

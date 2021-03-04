@@ -1,18 +1,17 @@
 import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/type.dart';
 
-dynamic dartConstObjectField(DartObject dartObject, String fieldName) {
+dynamic dartConstObjectField(DartObject? dartObject, String fieldName) {
   if (dartObject == null) {
     return null;
   }
   return dartConstObjectValue(dartObject.getField(fieldName));
 }
 
-dynamic dartConstObjectValue(DartObject dartObject) {
+dynamic dartConstObjectValue(DartObject? dartObject) {
   if (dartObject == null) {
     return null;
   }
-  ParameterizedType fieldType = dartObject.type;
+  var fieldType = dartObject.type;
   if (fieldType == null || fieldType.isDartCoreNull) {
     return null;
   } else if (fieldType.isDartCoreString) {
@@ -26,28 +25,29 @@ dynamic dartConstObjectValue(DartObject dartObject) {
   } else if (fieldType.isDartCoreDouble) {
     return dartObject.toDoubleValue();
   } else if (fieldType.isDartCoreList) {
-    List internal = dartObject.toListValue();
+    var internal = dartObject.toListValue();
     if (internal == null) {
       return null;
     }
     return [for (DartObject content in internal) dartConstObjectValue(content)];
   } else if (fieldType.isDartCoreMap) {
-    Map internal = dartObject.toMapValue();
+    var internal = dartObject.toMapValue();
     if (internal == null) {
       return null;
     }
     return {
-      for (DartObject content in internal.keys)
+      for (var content in internal.keys)
         dartConstObjectValue(content): dartConstObjectValue(internal[content])
     };
   } else if (fieldType.isDartCoreSet) {
-    Set internal = dartObject.toSetValue();
+    var internal = dartObject.toSetValue();
     if (internal == null) {
       return null;
     }
     return {for (DartObject content in internal) dartConstObjectValue(content)};
   } else {
     // Todo
-    throw UnsupportedError('Unsupported type ${fieldType.name}');
+    throw UnsupportedError(
+        'Unsupported type ${fieldType.getDisplayString(withNullability: true)}');
   }
 }
