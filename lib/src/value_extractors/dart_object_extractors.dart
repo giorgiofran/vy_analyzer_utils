@@ -1,13 +1,13 @@
 import 'package:analyzer/dart/constant/value.dart';
 
-dynamic dartConstObjectField(DartObject? dartObject, String fieldName) {
+Object? dartConstObjectField(DartObject? dartObject, String fieldName) {
   if (dartObject == null) {
     return null;
   }
   return dartConstObjectValue(dartObject.getField(fieldName));
 }
 
-dynamic dartConstObjectValue(DartObject? dartObject) {
+Object? dartConstObjectValue(DartObject? dartObject) {
   if (dartObject == null) {
     return null;
   }
