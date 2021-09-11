@@ -12,6 +12,7 @@ dynamic dartConstObjectValue(DartObject dartObject) {
   if (dartObject == null) {
     return null;
   }
+  // ignore: omit_local_variable_types
   ParameterizedType fieldType = dartObject.type;
   if (fieldType == null || fieldType.isDartCoreNull) {
     return null;
@@ -48,6 +49,7 @@ dynamic dartConstObjectValue(DartObject dartObject) {
     return {for (DartObject content in internal) dartConstObjectValue(content)};
   } else {
     // Todo
-    throw UnsupportedError('Unsupported type ${fieldType.name}');
+    throw UnsupportedError(
+        'Unsupported type ${fieldType.getDisplayString(withNullability: false)}');
   }
 }

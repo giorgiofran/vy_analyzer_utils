@@ -15,7 +15,7 @@ import 'package:analyzer/file_system/physical_file_system.dart'
 
 import 'mixin/ast_unit_info.dart';
 
-final dartFile = Glob("**.dart");
+final dartFile = Glob('**.dart');
 
 class DartSourceAnalysis {
   final Directory dir;
@@ -26,20 +26,20 @@ class DartSourceAnalysis {
 
   DartSourceAnalysis(this.visitor,
       {this.dir, Glob fileSelection, bool resolvedAnalysis})
-      : this.fileSelection = fileSelection ?? dartFile,
-        this.resolvedAnalysis = resolvedAnalysis ?? true;
+      : fileSelection = fileSelection ?? dartFile,
+        resolvedAnalysis = resolvedAnalysis ?? true;
 
   Future<void> run() async {
-    AnalysisContextCollection collection =
+    var collection =
         getAnalysisContextCollection(dir ?? Directory.current);
     await analyzeAllFiles(collection);
   }
 
   Future<void> analyzeAllFiles(AnalysisContextCollection collection) async {
-    for (AnalysisContext context in collection.contexts) {
+    for (var context in collection.contexts) {
       _log.info('Analyzing files "$fileSelection" in context: '
           '${context.contextRoot.root.path}');
-      for (String path in context.contextRoot.analyzedFiles()) {
+      for (var path in context.contextRoot.analyzedFiles()) {
         if (fileSelection.matches(path)) {
           await analyzeSingleFile(context, path);
         }
@@ -49,7 +49,7 @@ class DartSourceAnalysis {
 
   Future<void> analyzeSingleFile(AnalysisContext context, String path) async {
     _log.fine('Analyzing source: $path');
-    AnalysisSession session = context.currentSession;
+    var session = context.currentSession;
     CompilationUnit unit;
     if (resolvedAnalysis) {
       unit = await processResolvedFile(session, path);
@@ -65,6 +65,7 @@ class DartSourceAnalysis {
 
   /// Unresolved AST
   CompilationUnit processUnresolvedFile(AnalysisSession session, String path) {
+    // ignore: omit_local_variable_types
     ParsedUnitResult result = session.getParsedUnit(path);
     return result.unit;
   }
@@ -72,6 +73,7 @@ class DartSourceAnalysis {
   /// Resolved AST
   Future<CompilationUnit> processResolvedFile(
       AnalysisSession session, String path) async {
+    // ignore: omit_local_variable_types
     ResolvedUnitResult result = await session.getResolvedUnit(path);
     return result.unit;
   }

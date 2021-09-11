@@ -3,7 +3,6 @@ import 'package:test/test.dart';
 import 'package:vy_analyzer_utils/src/dart_source_analysis.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element.dart';
 import 'package:vy_analyzer_utils/src/value_extractors/dart_object_extractors.dart';
 
 ClassDeclaration testClassDeclaration;
@@ -27,8 +26,8 @@ void main() async {
       var inniz = member.fields.variables.last.initializer;
       print(inniz.toSource());
       print(inniz.childEntities.first.toString());
-      var tv =
-          testClassDeclaration.declaredElement.getMethod('testValues');
+     /*  var tv =
+          testClassDeclaration.declaredElement.getMethod('testValues'); */
       MethodDeclaration med = testClassDeclaration.members.last;
       print(med.childEntities);
       print(med.toSource());
