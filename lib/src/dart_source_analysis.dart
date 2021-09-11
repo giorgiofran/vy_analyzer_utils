@@ -7,6 +7,9 @@ import 'package:analyzer/dart/analysis/analysis_context_collection.dart'
 import 'package:analyzer/dart/analysis/analysis_context.dart'
     show AnalysisContext;
 import 'package:analyzer/dart/analysis/session.dart' show AnalysisSession;
+import 'package:analyzer/dart/analysis/results.dart'
+    show ParsedUnitResult, ResolvedUnitResult;
+
 import 'package:analyzer/dart/ast/ast.dart' show AstVisitor, CompilationUnit;
 import 'package:analyzer/file_system/physical_file_system.dart'
     show PhysicalResourceProvider;
@@ -62,15 +65,15 @@ class DartSourceAnalysis {
 
   /// Unresolved AST
   CompilationUnit processUnresolvedFile(AnalysisSession session, String path) {
-    var result = session.getParsedUnit(path);
+    var result = session.getParsedUnit(path) as ParsedUnitResult;
     return result.unit;
   }
 
   /// Resolved AST
   Future<CompilationUnit?> processResolvedFile(
       AnalysisSession session, String path) async {
-    var result = await session.getResolvedUnit(path);
-    return result?.unit;
+    var result = await session.getResolvedUnit(path) as ResolvedUnitResult;
+    return result.unit;
   }
 
   AnalysisContextCollection getAnalysisContextCollection(Directory directory) {
